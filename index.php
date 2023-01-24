@@ -2,15 +2,23 @@
 
 class Movie{
     public $title;
-    public $genre;
+    public $genres;
+
+    public function GetAllGenres(){
+        foreach($this->genres as $genre){
+            $str .= $genre . ' ';
+        }
+        return $str;
+    }
+
     public $year_release;
     public $publisher;
     public $length;
     public $synopsis;
     
-    public function __construct($title, $genre, $year, $publisher, $length, $synopsis){
+    public function __construct($title, array $genres, $year, $publisher, $length, $synopsis){
         $this -> title = $title;
-        $this -> genre = $genre;
+        $this -> genres = $genres;
         $this -> year_release = $year;
         $this -> publisher = $publisher;
         $this -> length = $length;
@@ -19,7 +27,7 @@ class Movie{
     
     public function GetMovieInfo(){
         return $this->title . '<br>' .
-            $this->genre . '<br>' .
+            $this->GetAllGenres() . '<br>' .
             $this->year_release . '<br>' .
             $this->publisher . '<br>' .
             $this->length . '<br>' .
@@ -27,8 +35,8 @@ class Movie{
     }
 }
 
-$Avatar = new Movie('Avatar', 'Fantascienza', 2009, '20th Century Fox', '2,39:1', 'lorem ipsum');
-$Luca = new Movie('Luca', 'Animazione', 2021, 'Pixar', '1.85:1', 'lorem ipsum');
+$Avatar = new Movie('Avatar', ['Fantascienza', 'Azione', 'Avventura'], 2009, '20th Century Fox', '2,39:1', 'lorem ipsum');
+$Luca = new Movie('Luca', ['Animazione', 'Avventura', 'Commedia', 'Fantastico'], 2021, 'Pixar', '1.85:1', 'lorem ipsum');
 echo $Avatar->GetMovieInfo();
 echo '<br>';
 echo $Luca->GetMovieInfo();
